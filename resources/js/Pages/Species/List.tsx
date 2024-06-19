@@ -3,25 +3,22 @@ import {Head} from '@inertiajs/react';
 import {PageProps, SpeciesType} from '@/types';
 import Species from "@/Pages/Species/Partials/Species";
 
-export default function List({auth, species, isocode}: PageProps) {
+export default function List({auth, species, title}: PageProps) {
 
-    console.log(species);
+    const pageTitle = `Species List${title ? `: ${title.toUpperCase()}` : ''}`
 
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Country
-                List</h2>}
+            header={<h2 className="font-medium text-xl leading-tight">{pageTitle}</h2>}
         >
-            <Head title={`${isocode} Species List`}/>
+            <Head title={pageTitle}/>
 
-            <div className="py-12">
-                <div></div>
-                <div>List</div>
+            <div className="max-w-7xl mx-auto py-6 px-4 sm:px-0 lg:px-8">
                 <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm">
                     <ul role="list" className="divide-y divide-gray-100">
-                        {species.map((element: SpeciesType) => (
-                            <li key={element.taxonid} className="align-middle">
+                        {species.map((element: SpeciesType, index: number) => (
+                            <li key={element.taxonid} className={`px-6 py-2 ${index%2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                 <Species species={element}/>
                             </li>
                         ))}

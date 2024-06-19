@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SpeciesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -28,12 +29,19 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('/country')->group(function () {
-        Route::get('', [CountryController::class, 'index'])->name('country');
-        Route::get('/list', [CountryController::class, 'list'])->name('country.list');
+        Route::get('', [CountryController::class, 'list'])->name('country');
+    });
+
+    Route::prefix('/region')->group(function () {
+        Route::get('', [RegionController::class, 'list'])->name('region');
     });
 
     Route::prefix('/species')->group(function () {
-        Route::get('{isocode}', [SpeciesController::class, 'listByCountry'])->name('species.country');
+        Route::get('', [SpeciesController::class, 'list'])->name('species');
+        Route::get('/country/{isocode}', [SpeciesController::class, 'listByCountry'])->name('species.country');
+        Route::get('/region/{identifier}', [SpeciesController::class, 'listByRegion'])->name('species.region');
+        Route::get('/class/{class}', [SpeciesController::class, 'filterByClass'])->name('species.class');
+        Route::get('/category/{category}', [SpeciesController::class, 'filterByCategory'])->name('species.category');
     });
 
 });

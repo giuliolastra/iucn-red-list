@@ -16,9 +16,21 @@ class Species extends Model
     protected $fillable = [
         'taxonid',
         'scientific_name',
+        'kingdom_name',
+        'phylum_name',
+        'class_name',
+        'order_name',
+        'family_name',
+        'genus_name',
+        'taxonomic_authority',
+        'infra_rank',
+        'infra_name',
+        'population',
+        'category',
+        'main_common_name',
         'subspecies',
         'rank',
         'subpopulation',
-        'category'
+        'conservation_measures'
     ];
 }

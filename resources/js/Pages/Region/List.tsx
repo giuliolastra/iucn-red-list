@@ -6,7 +6,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShuffle} from "@fortawesome/free-solid-svg-icons/faShuffle";
 
-export default function List({auth, regions}: PageProps) {
+export default function List({auth, regions}: PageProps  & {regions: Array<RegionType>}) {
 
     const getRandomRegion = function (): RegionType {
         return regions[Math.floor(Math.random() * regions.length)];

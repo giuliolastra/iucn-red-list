@@ -10,7 +10,7 @@ export default function Authenticated({user, header, children}: PropsWithChildre
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-4k-image">
+        <div className="min-h-screen bg-gray-300">
             <nav className="bg-oDarkBlue-950 border-b border-y-oDarkBlue-950 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">

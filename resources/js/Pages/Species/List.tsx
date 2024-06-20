@@ -3,9 +3,9 @@ import {Head} from '@inertiajs/react';
 import {PageProps, SpeciesType} from '@/types';
 import Species from "@/Pages/Species/Partials/Species";
 
-export default function List({auth, species, title}: PageProps) {
+export default function List({auth, species, title}: PageProps & {species: Array<SpeciesType>}) {
 
-    const pageTitle = `Species List${title ? `: ${title.toUpperCase()}` : ''}`
+    const pageTitle = `Species List${title ? ` - ${title}` : ''}`
 
     return (
         <AuthenticatedLayout

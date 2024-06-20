@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import {Head, Link} from '@inertiajs/react';
 import {RegionType, PageProps} from '@/types';
 import Region from "@/Pages/Region/Partials/Region";
@@ -6,7 +6,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShuffle} from "@fortawesome/free-solid-svg-icons/faShuffle";
 
-export default function List({auth, regions}: PageProps  & {regions: Array<RegionType>}) {
+export default function List({regions}: PageProps  & {regions: Array<RegionType>}) {
 
     const getRandomRegion = function (): RegionType {
         return regions[Math.floor(Math.random() * regions.length)];
@@ -15,8 +15,7 @@ export default function List({auth, regions}: PageProps  & {regions: Array<Regio
     const randomRegion = getRandomRegion();
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <MainLayout
             header={<h2 className="font-medium text-xl leading-tight">
                 Region List
                 <Link className="float-end hover:text-oGreen-500" href={route('species.region', randomRegion.identifier)}
@@ -40,6 +39,6 @@ export default function List({auth, regions}: PageProps  & {regions: Array<Regio
                     </ul>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

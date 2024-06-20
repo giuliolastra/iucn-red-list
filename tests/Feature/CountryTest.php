@@ -3,26 +3,14 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class CountryTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_unauthenticated(): void
-    {
-        $response = $this->get('/country');
-        $response->assertStatus(302);
-    }
 
-    public function test_authenticated(): void
+    public function test_country(): void
     {
-        $user = User::factory()->create();
-
         Http::fake([
             'https://apiv3.iucnredlist.org/api/v3/country/list*' => Http::response([
                 "count" => 3,
@@ -43,9 +31,7 @@ class CountryTest extends TestCase
             ])
         ]);
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/country');
+        $response = $this->get('/country');
 
         $response->assertStatus(200);
     }

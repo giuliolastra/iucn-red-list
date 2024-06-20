@@ -2,27 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class SpeciesTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_unauthenticated(): void
-    {
-        $response = $this->get('/species');
-        $response->assertStatus(302);
-    }
-
     public function test_list(): void
     {
-        $user = User::factory()->create();
-
         Http::fake([
             'https://apiv3.iucnredlist.org/api/v3/species/page/*' => Http::response([
                 "count" => 3,
@@ -80,17 +66,13 @@ class SpeciesTest extends TestCase
             ])
         ]);
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/species');
+        $response = $this->get('/species');
 
         $response->assertStatus(200);
     }
 
     public function test_region_europe(): void
     {
-        $user = User::factory()->create();
-
         Http::fake([
             'https://apiv3.iucnredlist.org/api/v3/species/region/europe/*' => Http::response([
                 "count" => 2,
@@ -132,17 +114,13 @@ class SpeciesTest extends TestCase
             ])
         ]);
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/species/region/europe');
+        $response = $this->get('/species/region/europe');
 
         $response->assertStatus(200);
     }
 
     public function test_country_az(): void
     {
-        $user = User::factory()->create();
-
         Http::fake([
             'https://apiv3.iucnredlist.org/api/v3/country/getspecies/az*' => Http::response([
                 "count" => 2,
@@ -169,9 +147,7 @@ class SpeciesTest extends TestCase
             ])
         ]);
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/species/country/az');
+        $response = $this->get('/species/country/az');
 
         $response->assertStatus(200);
     }

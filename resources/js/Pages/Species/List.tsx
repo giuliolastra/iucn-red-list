@@ -1,15 +1,14 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import {Head} from '@inertiajs/react';
 import {PageProps, SpeciesType} from '@/types';
 import Species from "@/Pages/Species/Partials/Species";
 
-export default function List({auth, species, title}: PageProps & {species: Array<SpeciesType>}) {
+export default function List({species, title}: PageProps & {species: Array<SpeciesType>}) {
 
     const pageTitle = `Species List${title ? ` - ${title}` : ''}`
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <MainLayout
             header={<h2 className="font-medium text-xl leading-tight">{pageTitle}</h2>}
         >
             <Head title={pageTitle}/>
@@ -25,6 +24,6 @@ export default function List({auth, species, title}: PageProps & {species: Array
                     </ul>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

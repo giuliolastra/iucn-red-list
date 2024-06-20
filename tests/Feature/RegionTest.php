@@ -2,27 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class RegionTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_unauthenticated(): void
+    public function test_region(): void
     {
-        $response = $this->get('/region');
-        $response->assertStatus(302);
-    }
-
-    public function test_authenticated(): void
-    {
-        $user = User::factory()->create();
-
         Http::fake([
             'https://apiv3.iucnredlist.org/api/v3/region/list*' => Http::response([
                 "count" => 3,
@@ -43,9 +29,7 @@ class RegionTest extends TestCase
             ])
         ]);
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/region');
+        $response = $this->get('/region');
 
         $response->assertStatus(200);
     }

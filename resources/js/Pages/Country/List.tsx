@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import {Head, Link} from '@inertiajs/react';
 import {CountryType, PageProps} from '@/types';
 import Country from "@/Pages/Country/Partials/Country";
@@ -6,7 +6,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShuffle} from "@fortawesome/free-solid-svg-icons/faShuffle";
 
-export default function List({auth, countries}: PageProps & {countries: Array<CountryType>}) {
+export default function List({countries}: PageProps & { countries: Array<CountryType> }) {
 
     const getRandomCountry = function (): CountryType {
         return countries[Math.floor(Math.random() * countries.length)];
@@ -15,8 +15,7 @@ export default function List({auth, countries}: PageProps & {countries: Array<Co
     const randomCountry = getRandomCountry();
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <MainLayout
             header={<h2 className="font-medium text-xl leading-tight">
                 Country List
                 <Link className="float-end hover:text-oGreen-500" href={route('species.country', randomCountry.isocode)}
@@ -40,6 +39,6 @@ export default function List({auth, countries}: PageProps & {countries: Array<Co
                     </ul>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

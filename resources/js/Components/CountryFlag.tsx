@@ -5,7 +5,6 @@ export default function CountryFlag({country, alt}: { country: string, alt: stri
         }
 
     }
-    return (
-        <img src={`https://flagsapi.com/${country}/flat/64.png`} alt={alt} onError={fallbackImage }/>
-    );
+    // @ts-ignore
+    return <><img src={`https://flagsapi.com/${country}/flat/64.png`} alt={alt} onError={fallbackImage}/></>;
 }
